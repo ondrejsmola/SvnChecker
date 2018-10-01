@@ -21,8 +21,9 @@ namespace SvnChecker
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.FileName = "svn";
-            p.StartInfo.Arguments = "log -r BASE:HEAD -q";
+            p.StartInfo.Arguments = "log -r BASE:HEAD";// -q";
             p.StartInfo.WorkingDirectory = directory;
+            p.StartInfo.CreateNoWindow = true;
             p.Start();
             // Do not wait for the child process to exit before
             // reading to the end of its redirected stream.
