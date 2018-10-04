@@ -14,7 +14,7 @@ namespace SvnChecker
             foreach (var configurationItem in configuration)
             {
                 var checkingTask = new CheckingTask();
-                tasks.Add(checkingTask.RunAsync(configurationItem, CancellationToken.None));
+                tasks.Add(checkingTask.RunAsync(configurationItem, configuration.IgnoreUser, CancellationToken.None));
             }
 
             Task.WaitAll(tasks.ToArray());

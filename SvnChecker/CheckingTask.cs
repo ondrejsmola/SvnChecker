@@ -6,7 +6,7 @@ namespace SvnChecker
 {
     public class CheckingTask
     {
-        public async Task RunAsync(ConfigurationItem configuration, CancellationToken cancellationToken)
+        public async Task RunAsync(ConfigurationItem configuration, string ignoreUser, CancellationToken cancellationToken)
         {
             await Task.Run(() =>
             {
@@ -16,7 +16,7 @@ namespace SvnChecker
                     var checker = new Checker();
                     var revisionInfo = checker.CheckRevision(configuration.Path);
                     if (revisionInfo is null) continue;
-                    if (revisionInfo.Revision > lastRevision)
+                    if ((revisionInfo.Revision > lastRevision) && (revisionInfo.User != ignoreUser))
                     {
                         var toast = new Toast();
                         toast.Show(revisionInfo, configuration.Caption);

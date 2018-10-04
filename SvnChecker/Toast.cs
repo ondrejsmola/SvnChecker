@@ -10,7 +10,7 @@ namespace SvnChecker
             {
                 notifyIcon.Visible = true;
                 notifyIcon.Icon = System.Drawing.SystemIcons.Information;
-                notifyIcon.BalloonTipTitle = $"SVN repository {repositoryName} updated";
+                notifyIcon.BalloonTipTitle = $"{repositoryName} updated";
                 notifyIcon.BalloonTipText = $"{revisionInfo.User} - {revisionInfo.Revision} - {revisionInfo.DateTime}\n{revisionInfo.LogMessage}";
 
                 notifyIcon.ShowBalloonTip(5000);
