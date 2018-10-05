@@ -6,7 +6,7 @@ namespace SvnChecker
 {
     public class TaskRunner
     {
-        public static void Run()
+        public static void Run(string ignoreUser)
         {
             var configuration = Configuration.Configuration.LoadFromFile(Configuration.Configuration.GetFileName());
             var tasks = new List<Task>();
@@ -14,7 +14,7 @@ namespace SvnChecker
             foreach (var configurationItem in configuration)
             {
                 var checkingTask = new CheckingTask();
-                tasks.Add(checkingTask.RunAsync(configurationItem, configuration.IgnoreUser, CancellationToken.None));
+                tasks.Add(checkingTask.RunAsync(configurationItem, ignoreUser, CancellationToken.None));
             }
 
             Task.WaitAll(tasks.ToArray());

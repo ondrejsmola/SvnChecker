@@ -10,8 +10,6 @@ namespace SvnChecker.Configuration
     {
         private static object _lock = new object();
 
-        public string IgnoreUser { get; set; }
-
         public static string GetFileName()
         {
             var exeName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;

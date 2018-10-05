@@ -2,9 +2,10 @@
 {
     public static class Program
     {
-        public static void Main()
+        public static void Main(string[] args)
         {
-            TaskRunner.Run();
+            var ignoreUser = args.Length > 0 ? args[0] : "";
+            TaskRunner.Run(ignoreUser);
         }
     }
 }
