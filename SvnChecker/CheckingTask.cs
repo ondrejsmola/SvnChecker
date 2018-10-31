@@ -15,15 +15,18 @@ namespace SvnChecker
                 {
                     var checker = new Checker();
                     var revisionInfo = checker.CheckRevision(configuration.Path);
-                    if (revisionInfo is null) continue;
-                    if ((revisionInfo.Revision > lastRevision) && (revisionInfo.User != ignoreUser))
+                    if (revisionInfo != null)
                     {
-                        var toast = new Toast();
-                        toast.Show(revisionInfo, configuration.Caption);
-                        lastRevision = revisionInfo.Revision;
-                        Configuration.Configuration.UpdateRevision(configuration.Path, lastRevision);
+                        if ((revisionInfo.Revision > lastRevision) && (revisionInfo.User != ignoreUser))
+                        {
+                            var toast = new Toast();
+                            toast.Show(revisionInfo, configuration.Caption);
+                            lastRevision = revisionInfo.Revision;
+                            Configuration.Configuration.UpdateRevision(configuration.Path, lastRevision);
+                        }
                     }
-                    Thread.Sleep(1000 * configuration.PollingInterval);
+                    var waitHandle = cancellationToken.WaitHandle;
+                    waitHandle.WaitOne(1000 * configuration.PollingInterval);
                 }
             },
             cancellationToken);
